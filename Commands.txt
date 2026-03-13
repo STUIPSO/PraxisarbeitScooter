@@ -1,0 +1,118 @@
+1  sudo apt-get update
+    2  sudo apt-get upgrade
+    3  sudo apt purge xserver* lightdm* raspberrypi-ui-mods vlc* lxde* chromium* desktop* gnome* gstreamer* gtk* hicolor-icon-theme* lx* mesa*
+    4  sudo apt autoremove
+    5  reboot
+    6  sudo reboot
+    7  sudo apt install python3 python3-pip python3-venv mariadb-server git nginx -y
+    8  uname -m
+   10  sudo mkdir -p --mode=0755 /usr/share/keyrings
+   11  curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
+   13  echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+   15  sudo apt-get update && sudo apt-get install cloudflared
+   16  sudo cloudflared service install eyJhIjoiMzYyNWNiN2UzNjY4MDc1OTI1ZTgzZWFiY2I3ZmVhYzkiLCJ0IjoiNTYyZTY1NTEtMmQzOS00NjMyLThiMGYtNDU1ZTdmNmVhYzU1IiwicyI6IlpqVTBZelF6TTJJdE5ESmtZaTAwWWpjNUxXSTRZVE10WWpNME1USXlPR0kzWlRkbCJ9
+   17  sudo mysql_secure_installation
+   18  sudo apt install python3 python3-pip python3-venv mariadb-server git nginx -y
+   19  sudo mysql_secure_installation
+   20  sudo systemctl start mariadb
+   21  sudo systemctl enable mariadb
+   22  sudo mariadb-secure-installation
+   23  sudo mariadb
+   24  mkdir praxisarbeit
+   25  cd praxisarbeit
+   26  git init
+   27  python3 -m venv venv
+   28  source venv/bin/activate
+   29  pip install flask flask-sqlalchemy flask-login pymysql gunicorn
+   30  sudo nano requirements.txt
+   31  sudo nano models.py
+   32  sudo nano app.py
+   33  mkdir templates
+   34  cd templates/
+   35  sudo nano index.html
+   36  cd ..
+   37  python3 app.py
+   38  cd templates/
+   39  sudo nano register.html
+   40  sudo nano login.html
+   41  cd ..
+   42  python3 app.py
+   43  ls
+   44  cd praxisarbeit/
+   45  ls
+   46  python3 app.py
+   47  pip install flask flask-sqlalchemy flask-login pymysql gunicorn
+   48  sudo python3 app.py
+   49  pip install flask flask-sqlalchemy flask-login pymysql gunicornpip install flask-login
+   50  pip install flask-login
+   51  pip install -r requirements.txt
+   52  python3 -m venv venv
+   53  source venv/bin/activate
+   54  pip install -r requirements.txt
+   55  python3 app.py
+   56  ls
+   57  cd praxisarbeit/
+   58  ls
+   59  nano models.py
+   60  sudo nano models.py
+   61  sudo rm models.py
+   62  sudo nano models.py
+   63  mariadb
+   64  sudo mariadb
+   65  sudo rm app.py
+   66  sudo nano app.py
+   67  ls
+   68  cd templates/
+   69  sudo nano index.html
+   70  cd ..
+   71  python3 app.py
+   72  python3 -m venv venv
+   73  python3 app.py
+   74  sudo nano app.py
+   75  python3 app.py
+   76  sudo nano app.py
+   77  python3 app.py
+   78  sudo nano app.py
+   79  python3 app.py
+   80  source venv/bin/activate
+   81  python3 app.py
+   82  sudo nano models.py
+   83  python3 app.py
+   84  pip install qrcode[pil]
+   85  python3 app.py
+   86  sudo nano app.py
+   87  python3 app.py
+   88  sudo mariadb
+   89  sudo nano app.py
+   90  python3
+   91  sudo nano app.py
+   92  python3 app.py
+   93  sudo nano templates/index.html
+   94  python3 app.py
+   95  sudo nano templates/index.html
+   96  python3 app.py
+   97  ls
+   98  sudo nano praxisarbeit.service
+   99  sudo cp praxisarbeit.service /etc/systemd/system/
+  100  sudo systemctl daemon-reload
+  101  sudo systemctl start praxisarbeit
+  102  sudo systemctl enable praxisarbeit
+  103  sudo systemctl daemon-reload
+  104  sudo systemctl start praxisarbeit
+  105  sudo systemctl enable praxisarbeit
+  106  sudo nano requirements.txt
+  107  reboot
+  108  sudo reboot
+  109  sudo systemctl restart praxisarbeit
+  110  sudo systemctl status praxisarbeit
+  111  cd praxisarbeit/
+  112  sudo nano praxisarbeit.service
+  113  sudo cp praxisarbeit.service /etc/systemd/system/
+  114  sudo systemctl daemon-reload
+  115  sudo systemctl start praxisarbeit
+  116  sudo systemctl enable praxisarbeit
+  117  sudo reboot
+  118  cd praxisarbeit/
+  119  sudo nano app.py
+  120  sudo nano templates/index.html
+  121  sudo systemctl restart praxisarbeit

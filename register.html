@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Registrieren</title></head>
+<body style="font-family: sans-serif; padding: 40px;">
+    <h2>Neuen Account erstellen</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}<p style="color:red">{{ messages[0] }}</p>{% endif %}
+    {% endwith %}
+    <form method="POST">
+        <input type="text" name="username" placeholder="Benutzername" required><br><br>
+        <input type="email" name="email" placeholder="Email" required><br><br>
+        <input type="password" name="password" placeholder="Passwort" required><br><br>
+        <button type="submit">Registrieren</button>
+    </form>
+    <p><a href="/login">Zum Login</a></p>
+</body>
+</html>

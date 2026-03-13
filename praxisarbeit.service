@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn Instanz fuer Praxisarbeit
+After=network.target
+
+[Service]
+User=emu
+Group=emu
+WorkingDirectory=/home/emu/praxisarbeit
+Environment="PATH=/home/emu/praxisarbeit/venv/bin"
+# Startet Gunicorn auf Port 8000 mit 3 Arbeitern
+ExecStart=/home/emu/praxisarbeit/venv/bin/gunicorn --workers 3 --bind 0.0.0.0:8000 app:app
+
+[Install]
+WantedBy=multi-user.target

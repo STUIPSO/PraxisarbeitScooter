@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Scooter Dashboard</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+        .badge { padding: 5px 10px; border-radius: 4px; color: white; }
+        .free { background-color: green; }
+        .rented { background-color: red; }
+        .alert { background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 10px;}
+        .success { background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+    <h1>E-Scooter Verleih</h1>
+
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+        {% if messages %}<div class="alert">{{ messages[0] }}</div>{% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}<div class="success">{{ messages[0] }}</div>{% endif %}
+    {% endwith %}
+
+    {% if current_user.is_authenticated %}
+        <p>Hallo <b>{{ current_user.username }}</b> | <a href="/logout">Logout</a></p>
+        <div style="background:#eee; padding:10px; font-family:monospace;">
+            DEIN API KEY: {{ current_user.api_token }}
+        </div>
+    {% else %}
+        <p><a href="/login">Login</a> | <a href="/register">Registrieren</a></p>
+    {% endif %}
+    {% if current_user.is_authenticated %}
+        <div style="margin-top: 20px; background: #e9ecef; padding: 15px; border-radius: 5px;">
+            <h3>➕ Neuen Scooter registrieren</h3>
+            <form action="/add_scooter" method="POST" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" name="bezeichnung" placeholder="Modellbezeichnung (z.B. Blitz 2000)" required style="padding: 5px;">
+                <input type="text" name="standort" placeholder="Standort (z.B. Hauptplatz)" required style="padding: 5px;">
+                <input type="number" name="batterie" placeholder="Akku %" value="100" min="0" max="100" style="padding: 5px; width: 60px;">
+                <button type="submit" style="background-color: #28a745; color: white; border: none; padding: 5px 15px; cursor: pointer;">Hinzufügen</button>
+            </form>
+        </div>
+    {% endif %}
+    <hr>
+
+    {% for scooter in scooters %}
+    <div class="card">
+        <h3>{{ scooter.bezeichnung }} <small>(Akku: {{ scooter.batterie_status }}%)</small></h3>
+        <p>Standort: {{ scooter.standort }}</p>
+        
+        {% if scooter.ist_verliehen %}
+            <span class="badge rented">Unterwegs</span>
+            {% if current_user.is_authenticated %}
+                <a href="/return/{{ scooter.id }}"><button>Zurückgeben</button></a>
+            {% endif %}
+        {% else %}
+            <span class="badge free">Verfügbar</span>
+            
+            <div style="margin-top:10px; display:flex; align-items:center;">
+                <img src="{{ url_for('generate_qrcode', scooter_id=scooter.id) }}" width="100">
+                <div style="margin-left: 20px;">
+                    <small>Scan mich oder:</small><br>
+                    {% if current_user.is_authenticated %}
+                        <a href="/rent/{{ scooter.id }}"><button>Jetzt Mieten</button></a>
+                    {% else %}
+                        <small>(Bitte einloggen zum Mieten)</small>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</body>
+</html>
